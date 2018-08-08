@@ -15,10 +15,26 @@ $(document).ready(function() {
       console.log(body._links['ua:item']);
 
       for (let i = 0; i< body._links['ua:item'].length; i++)
-      $('#citiesDropdown').append(`<option>${body._links['ua:item'][i].name}</option>`);
+      $('#citiesDropdown').append(`<option value="${body._links['ua:item'][i].href}">${body._links['ua:item'][i].name}</option>`);
     }, function(error) {
       $('.showErrors').text(`There was an error processing your request: ${error.message}`);
     });
 
-    console.log(body);
+    $("#cities-form").submit(function(event){
+      event.preventDefault();
+      let href = $("#citiesDropdown").val().toLowerCase();
+      console.log(href);
+      let scoresPromise = search.getCityScores(href);
+
+      scoresPromise.then(function(response) {
+        let body = JSON.parse(response);
+        console.log(body.categories[0].name);
+        console.log(body.categories[0].score_out_of_10);
+
+      }, function(error) {
+        $('.showErrors').text(`There was an error processing your request: ${error.message}`);
+      });
+
+
+    });
 });
