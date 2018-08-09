@@ -1,17 +1,24 @@
 <!DOCTYPE html>
 <html>
 <head>
+<script src="https://www.amcharts.com/lib/3/amcharts.js"></script>
+<script src="https://www.amcharts.com/lib/3/serial.js"></script>
+<script src="https://www.amcharts.com/lib/3/plugins/export/export.min.js"></script>
+<link rel="stylesheet" href="https://www.amcharts.com/lib/3/plugins/export/export.css" type="text/css" media="all" />
+<script src="https://www.amcharts.com/lib/3/themes/dark.js"></script>
   <title>Teleport</title>
 </head>
 <body>
   <div class="container">
     <h1>Teleport</h1>
     <form class="submit" id="cities-form">
-      <select id="citiesDropdown">
+      <select id="citiesDropdown1">
+      </select>
+      <select id="citiesDropdown2">
       </select>
       <button id="submit" type="submit" class="btn btn-success">Search</button>
     </form>
-
+    <div id="chartdiv"></div>
   </div>
 </body>
 </html>
