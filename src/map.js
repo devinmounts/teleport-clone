@@ -10,10 +10,9 @@ export class Map{
       "projection": "winkel3",
       "theme": "dark",
       "imagesSettings": {
-        "scale": 6,
         "rollOverColor": "#089282",
-        "rollOverScale": 8,
-        "selectedScale": 8,
+        "rollOverScale": 3,
+        "selectedScale": 3,
         "selectedColor": "red",
         "color": "red"
       },
