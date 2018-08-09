@@ -4,15 +4,18 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import './styles.css';
 import { Search } from './user.js';
 import { Chart } from './chart.js';
+import { Map } from './map.js';
 
 $(document).ready(function() {
 
     let search = new Search();  // create instance of WeatherService class
     let promise = search.getCities();  // call the instance method
     let names = [];
+    let latlon = [];
 
     promise.then(function(response) {
       let body = JSON.parse(response);
+
 
       for (let i = 0; i< body._links['ua:item'].length; i++) {
       let href = body._links['ua:item'][i].href;
@@ -35,11 +38,18 @@ $(document).ready(function() {
       names[1] = city2;
       let scoresPromise1 = search.getCityScores(href1);
       let scoresPromise2 = search.getCityScores(href2);
+      let locationPromise1 = search.getLatLon(href1);
+      // let locationPromise2 = search.getLatLon(href2);
+      console.log(href2);
       let objectArray = [];
+      let targetSVG = "M9,0C4.029,0,0,4.029,0,9s4.029,9,9,9s9-4.029,9-9S13.971,0,9,0z M9,15.93 c-3.83,0-6.93-3.1-6.93-6.93S5.17,2.07,9,2.07s6.93,3.1,6.93,6.93S12.83,15.93,9,15.93 M12.5,9c0,1.933-1.567,3.5-3.5,3.5S5.5,10.933,5.5,9S7.067,5.5,9,5.5 S12.5,7.067,12.5,9z";
+      let cityArray = [];
 
       scoresPromise1.then(function(response) {
         let body = JSON.parse(response);
+        console.log(body);
         let i = 0;
+
         body.categories.forEach((category) => {
           let objects = {};
           let name = category.name;
@@ -49,6 +59,7 @@ $(document).ready(function() {
           objectArray[i] = objects;
           i++;
         });
+
         scoresPromise2.then(function(response) {
           let body = JSON.parse(response);
           let i = 0;
@@ -66,20 +77,35 @@ $(document).ready(function() {
         $('.showErrors').text(`There was an error processing your request: ${error.message}`);
       });
 
+      locationPromise1.then(function(response) {
+        let body = JSON.parse(response);
+        let object = {};
+        let lon = body.bounding_box.latlon.east;
+        let lat = body.bounding_box.latlon.north;
+        let name = body.name;
+        object["svgPath"] = targetSVG;
+        object["zoomLevel"] = 5;
+        object["scale"] = 0.5;
+        object["title"] = name;
+        object["latitude"] = lat;
+        object["longitude"] = lon;
+        cityArray[0] = object;
+        console.log(cityArray[0]);
+        console.log(cityArray);
+        let map = new Map(cityArray);
+        map.createMap();
+      }, function(error) {
+        $('.showErrors').text(`There was an error processing your request: ${error.message}`);
+      });
 
 
-
-
-    });
+    //   let cityArray = [{
+    //   "svgPath": targetSVG,
+    //   "zoomLevel": 5,
+    //   "scale": 0.5,
+    //   "title": "Yaounde",
+    //   "latitude": 3.8612,
+    //   "longitude": 11.5217
+    // }]
+  });
 });
-
-// [{
-//   "categories": "housing",
-//   "male": -1,
-//   "female": 1
-// },
-// {
-//   "categories": "bananas",
-//   "male": -50,
-//   "female": 50
-// }];
