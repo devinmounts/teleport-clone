@@ -8,17 +8,18 @@ export class Map{
     let map = AmCharts.makeChart( "mapdiv", {
       "type": "map",
       "projection": "winkel3",
-      "theme": "none",
+      "theme": "dark",
       "imagesSettings": {
+        "scale": 6,
         "rollOverColor": "#089282",
-        "rollOverScale": 3,
-        "selectedScale": 3,
-        "selectedColor": "#089282",
-        "color": "#13564e"
+        "rollOverScale": 8,
+        "selectedScale": 8,
+        "selectedColor": "red",
+        "color": "red"
       },
 
       "areasSettings": {
-        "unlistedAreasColor": "#15A892",
+        "unlistedAreasColor": "blue",
         "outlineThickness": 0.1
       },
 

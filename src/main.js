@@ -85,7 +85,7 @@ $(document).ready(function() {
         let name = body.name;
         object["svgPath"] = targetSVG;
         object["zoomLevel"] = 5;
-        object["scale"] = 0.5;
+        object["scale"] = 3;
         object["title"] = name;
         object["latitude"] = lat;
         object["longitude"] = lon;
