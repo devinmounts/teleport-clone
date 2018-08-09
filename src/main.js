@@ -47,7 +47,6 @@ $(document).ready(function() {
 
       scoresPromise1.then(function(response) {
         let body = JSON.parse(response);
-        console.log(body);
         let i = 0;
 
         body.categories.forEach((category) => {
@@ -82,31 +81,34 @@ $(document).ready(function() {
 
       locationPromise1.then(function(response) {
         let body = JSON.parse(response);
-        let object = {};
+        console.log(body);
+        let object1 = {};
         let lon = body.bounding_box.latlon.east;
         let lat = body.bounding_box.latlon.north;
         let name = body.name;
-        object["svgPath"] = targetSVG;
-        object["zoomLevel"] = 5;
-        object["scale"] = 1;
-        object["title"] = name;
-        object["latitude"] = lat;
-        object["longitude"] = lon;
-        cityArray[0] = object;
+        object1["svgPath"] = targetSVG;
+        object1["zoomLevel"] = 5;
+        object1["scale"] = 1;
+        object1["title"] = name;
+        object1["latitude"] = lat;
+        object1["longitude"] = lon;
+        console.log(object1);
+        cityArray[0] = object1;
 
         locationPromise2.then((response) => {
           let body = JSON.parse(response);
-          let object = {};
+          let object2 = {};
           let lon = body.bounding_box.latlon.east;
-          let lat = body.bounding_box.latlon.east;
+          let lat = body.bounding_box.latlon.north;
           let name = body.name;
-          object["svgPath"] = targetSVG;
-          object["zoomLevel"] = 5;
-          object["scale"] = 1;
-          object["title"] = name;
-          object["latitude"] = lat;
-          object["longitude"] = lon;
-          cityArray[1] = object;
+          object2["svgPath"] = targetSVG;
+          object2["zoomLevel"] = 5;
+          object2["scale"] = 1;
+          object2["title"] = name;
+          object2["latitude"] = lat;
+          object2["longitude"] = lon;
+          cityArray[1] = object2;
+          console.log(object2);
           let map = new Map(cityArray);
           map.createMap();
         }, function(error) {
