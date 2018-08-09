@@ -1,8 +1,10 @@
 export class Chart{
-  constructor(objectArray){
+  constructor(objectArray, city1, city2){
     this.objectArray = objectArray;
+    this.city1 = city1;
+    this.city2 = city2;
   }
-  
+
   makeChart(){
     let chart = AmCharts.makeChart("chartdiv", {
       "type": "serial",
@@ -15,29 +17,29 @@ export class Chart{
         "fillAlphas": 0.8,
         "lineAlpha": 0.2,
         "type": "column",
-        "valueField": "male",
-        "title": "Male",
+        "valueField": this.city1,
+        "title": this.city1,
         "labelText": "[[value]]",
         "clustered": false,
         "labelFunction": function(item) {
           return Math.abs(item.values.value);
         },
         "balloonFunction": function(item) {
-          return item.category + ": " + Math.abs(item.values.value) + "%";
+          return item.category + ": " + Math.abs(item.values.value);
         }
       }, {
         "fillAlphas": 0.8,
         "lineAlpha": 0.2,
         "type": "column",
-        "valueField": "female",
-        "title": "Female",
+        "valueField": this.city2,
+        "title": this.city2,
         "labelText": "[[value]]",
         "clustered": false,
         "labelFunction": function(item) {
           return Math.abs(item.values.value);
         },
         "balloonFunction": function(item) {
-          return item.category + ": " + Math.abs(item.values.value) + "%";
+          return item.category + ": " + Math.abs(item.values.value);
         }
       }],
       "categoryField": "categories",
@@ -50,7 +52,7 @@ export class Chart{
         "gridAlpha": 0,
         "ignoreAxisWidth": true,
         "labelFunction": function(value) {
-          return Math.abs(value) + '%';
+          return Math.abs(value);
         },
         "guides": [{
           "value": 0,
@@ -66,13 +68,13 @@ export class Chart{
         "fullWidth": true
       },
       "allLabels": [{
-        "text": "Male",
+        "text": this.city1,
         "x": "28%",
         "y": "97%",
         "bold": true,
         "align": "middle"
       }, {
-        "text": "Female",
+        "text": this.city2,
         "x": "75%",
         "y": "97%",
         "bold": true,

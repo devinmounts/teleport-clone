@@ -31,14 +31,14 @@ export class Search {
     });
   }
 }
-
-{
-  "categories": "housing",
-  "male": -1,
-  "female": 1
-},
-{
-  "categories": "bananas",
-  "male": -50,
-  "female": 50
-}];
+// 
+// {
+//   "categories": "housing",
+//   "male": -1,
+//   "female": 1
+// },
+// {
+//   "categories": "bananas",
+//   "male": -50,
+//   "female": 50
+// }];
